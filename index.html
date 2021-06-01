@@ -17,9 +17,33 @@ table, th, td {
   text-align: center;
   width: 812px;
 }
+
+.sidenav {
+  border: 1px solid black;
+  width: 130px;
+  position: fixed;
+  z-index: 1;
+  top: 20px;
+  left: 10px;
+  background: #ccffff;
+  overflow-x: hidden;
+  padding: 8px 0;
+}
+
+.main {
+  margin-left: 10%; /* Same width as the sidebar + left position in px */
+  padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
 </style>
 </head>
 <body>
+<div class="main">
 <button id="start">Start Game!</button>
 <table style="width:100%">
 <tr><th>Player 1</th><th>Player 2</th> 
@@ -28,24 +52,24 @@ table, th, td {
 </td><td><h2><p id="p2score"></p></h2>
 </td></tr>
 </table>
-<canvas id="canvas" style="width:100%"></canvas>';
+<canvas id="canvas" style="width:100%"></canvas>
+</div>
 
-<br>
-<table>
-  <tr><th><h2>Speed settings</h2>
-  <button id= "SpeedBall">Increase Ball Speed</button>
-<button id= "SpeedPlayer">Increase Player Speed</button>
-<button id= "SlowBall">Decrease Ball Speed</button>
-<button id= "SlowPlayer">Decrease Player Speed</button></th>
-<th><h2>Alert settings</h2>
-<button id= "Alert">Disable Alerts</button>
-<button id= "Alert2">Enable Alerts</button></th>
-<th><h2>Screen settings</h2>
-<button id= "Width">Rotate Left</button>
-<button id= "Height">Rotate Right</button>
-<button id= "Width2">Rotate Up</button>
-<button id= "Height2">Rotate Down</button></th>
-</tr></table>
+<div class="sidenav" style="height:90%">
+<h2>Settings</h2>
+  <h4>Ball speed</h4><button id= "SpeedBall" class="btn btn-primary navbar-btn">Increase</button>
+  <button id= "SlowBall" class="btn btn-primary navbar-btn">Decrease</button>
+<h4>Player speed</h4><button id= "SpeedPlayer" class="btn btn-primary navbar-btn">Increase</button>
+<button id= "SlowPlayer" class="btn btn-primary navbar-btn">Decrease</button>
+<h4>Alerts</h4>
+<button id= "Alert" class="btn btn-primary navbar-btn">Disable</button>
+<button id= "Alert2" class="btn btn-primary navbar-btn">Enable</button>
+<h4>Camera</h4>
+<button id= "Width" class="btn btn-primary navbar-btn">Rotate Left</button>
+<button id= "Height" class="btn btn-primary navbar-btn">Rotate Right</button>
+<button id= "Width2" class="btn btn-primary navbar-btn">Rotate Up</button>
+<button id= "Height2" class="btn btn-primary navbar-btn">Rotate Down</button>
+</div>
 </body>
 <!--
 for most samples webgl-utils only provides shader compiling/linking and
@@ -93,11 +117,6 @@ uniform sampler2D u_texture;
 void main() {
    gl_FragColor = texture2D(u_texture, v_texcoord) * v_color * u_colorMult;
 }
-</script>
-<script>
-function myFunction() {
-  document.getElementById("start").innerHTML = '<table style="width:100%"><tr><th>Player 1</th><th>Player 2</th> </tr><tr><td><h2><p id="p1score"></p></h2></td><td><h2><p id="p2score"></p></h2></td></tr></table>';
-  }
 </script>
 <script src="resources/pong.js" defer></script>
 </html>
