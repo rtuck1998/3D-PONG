@@ -20,17 +20,16 @@ table, th, td {
 </style>
 </head>
 <body>
+<button id="start">Start Game!</button>
 <table style="width:100%">
-  <tr>
-    <th>Player 1</th>
-    <th>Player 2</th>
-  </tr>
-  <tr>
-    <td><h2><p id="p1score"></p></h2></td>
-    <td><h2><p id="p2score"></p></h2></td>
-  </tr>
+<tr><th>Player 1</th><th>Player 2</th> 
+</tr><tr><td>
+<h2><p id="p1score"></p></h2>
+</td><td><h2><p id="p2score"></p></h2>
+</td></tr>
 </table>
-<canvas id="canvas" style="width:100%"></canvas>
+<canvas id="canvas" style="width:100%"></canvas>';
+
 <br>
 <table>
   <tr><th><h2>Speed settings</h2>
@@ -94,6 +93,11 @@ uniform sampler2D u_texture;
 void main() {
    gl_FragColor = texture2D(u_texture, v_texcoord) * v_color * u_colorMult;
 }
+</script>
+<script>
+function myFunction() {
+  document.getElementById("start").innerHTML = '<table style="width:100%"><tr><th>Player 1</th><th>Player 2</th> </tr><tr><td><h2><p id="p1score"></p></h2></td><td><h2><p id="p2score"></p></h2></td></tr></table>';
+  }
 </script>
 <script src="resources/pong.js" defer></script>
 </html>
