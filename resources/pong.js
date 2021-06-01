@@ -177,8 +177,6 @@ function main() {
 		speed_y = -speed_y;
 		ball_y = ball_y - speed_y;
 		console.log(ball_y); 
-		
-		console.log(speed_y);
 	} // Bounce off top and bottom walls
 	
 	
@@ -454,4 +452,7 @@ var speed_y = -0.4;
 var speed_player = 1.5;
 var background_col = 0;
 var alertsOn = false;
-main();
+
+document.getElementById( "start" ).onclick = function () {
+        main();
+    };
