@@ -28,7 +28,7 @@ function main() {
   // data for primitives by calling gl.createBuffer, gl.bindBuffer,
   // and gl.bufferData
   const sphereBufferInfo = primitives.createSphereWithVertexColorsBufferInfo(gl, 2, 12, 6);
-  const sphereBufferInfo2 = primitives.createSphereWithVertexColorsBufferInfo(gl, 0.5, 12, 6);
+  //const sphereBufferInfo2 = primitives.createSphereWithVertexColorsBufferInfo(gl, 0.5, 12, 6);
   const cube1BufferInfo   = primitives.createCubeWithVertexColorsBufferInfo(gl, 10);
   const cube2BufferInfo  = primitives.createCubeWithVertexColorsBufferInfo(gl, 10);
 
@@ -163,12 +163,14 @@ function main() {
 		speed_y = speed_y; 
 		speed_x = -speed_x; 
 		ball_x = ball_x + 2;
+		impact.play();
 	
 	}
 	if(ball_x >= 50 && ball_y <= p2_top && ball_y >= p2_bottom && p2_pos_z < 2 && p2_pos_z > -2){ 
 		speed_y = speed_y; 
 		speed_x = -speed_x; 
 		ball_x = ball_x - 2;
+		impact.play();
 	
 	}
 	
@@ -176,7 +178,6 @@ function main() {
 	if(ball_y >= 50 || ball_y <= -50){
 		speed_y = -speed_y;
 		ball_y = ball_y - speed_y;
-		console.log(ball_y); 
 	} // Bounce off top and bottom walls
 	
 	
@@ -370,7 +371,7 @@ function main() {
 
     gl.drawArrays(gl.TRIANGLES, 0, sphereBufferInfo.numElements);
 	
-	webglUtils.setBuffersAndAttributes(gl, programInfo, sphereBufferInfo2);
+	/**webglUtils.setBuffersAndAttributes(gl, programInfo, sphereBufferInfo2);
 
     sphereUniforms2.u_matrix = computeMatrix(
         viewProjectionMatrix,
@@ -382,7 +383,7 @@ function main() {
     // Set the uniforms we just computed
     webglUtils.setUniforms(programInfo, sphereUniforms2);
 
-    gl.drawArrays(gl.TRIANGLES, 0, sphereBufferInfo2.numElements);
+    gl.drawArrays(gl.TRIANGLES, 0, sphereBufferInfo2.numElements);**/
 
     // ------ Draw the cube1 --------
 
@@ -424,6 +425,22 @@ function main() {
     requestAnimationFrame(drawScene);
   }
 }
+
+function sound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "anonymous");
+    this.sound.setAttribute("controls", "anonymous");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.play = function(){
+        this.sound.play();
+    }
+    this.stop = function(){
+        this.sound.pause();
+    }    
+}
+
 var p1_pos = 0.0;
 var p2_pos = 0.0;
 var p1_pos_z = 0.0;
@@ -452,6 +469,8 @@ var speed_y = -0.4;
 var speed_player = 1.5;
 var background_col = 0;
 var alertsOn = false;
+
+var impact = new sound("hit.mp3");
 
 document.getElementById( "start" ).onclick = function () {
         main();
